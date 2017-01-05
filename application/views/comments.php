@@ -15,7 +15,7 @@
 	</script>
 </head>
 <body>
-<div id="message_comments" class="pull-right fixed hide">There is/are <span id="new_comments_count"></span> new comment(s). Click [here] to view.</div>
+<div id="message_comments" class="pull-right fixed hide">There is/are <span id="new_comments_count"></span> new comment(s). Click [<a href="#" id="show_new_comments">here</a>] to view.</div>
 <div class="container" id="comments">
 	<br />
 	<?php if(count($comments) > 0): ?>

@@ -26,9 +26,9 @@ class Comments_model extends CI_Model {
     * @return array
     */
     function getNewComments($time, $item_id) {
-    	$query = $this->db->get_where('comments', array(
-    		'date >' => $time,
-    		'item_id' => $item_id));
+    	$query = $this->db->select('c.description, c.date, u.username')->join('users u', 'u.userid=c.userid')->order_by('date', 'ASC')->get_where('comments c', array(
+    		'c.date >' => $time,
+    		'c.item_id' => $item_id));
     	return $query->result_array();
     }
 }
