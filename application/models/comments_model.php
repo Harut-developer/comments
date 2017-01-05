@@ -18,4 +18,17 @@ class Comments_model extends CI_Model {
     function insert($data) {
     	$this->db->insert('comments', $data);
     }
+
+    /**
+    * Get new comments
+    * @param $time string
+    * @param $item_id int
+    * @return array
+    */
+    function getNewComments($time, $item_id) {
+    	$query = $this->db->get_where('comments', array(
+    		'date >' => $time,
+    		'item_id' => $item_id));
+    	return $query->result_array();
+    }
 }

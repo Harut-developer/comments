@@ -18,10 +18,14 @@ class main extends CI_Controller {
 				$this->load->model('comments_model');
 				$new_comment = $this->input->post('comment');
 				if($new_comment) {
+					$this->load->model('users_model');
 					$this->comments_model->insert(array('item_id' => $item_id, 'description' => $new_comment, 'userid' => $login, 'date' => date('Y-m-d H:i:s')));
+					//change status typeing after inserted
+					$this->users_model->update(array('typing' => 0), array('userid' => $login));
+					redirect('/main/comments/'.$item_id);
 				}
 				$data = $this->comments_model->get(array('item_id' => $item_id));
-				$this->load->view('comments', array('comments' => $data));
+				$this->load->view('comments', array('comments' => $data, 'item_id' => $item_id));
 			} else {
 				redirect('/main/comments/1');
 			}
@@ -68,6 +72,27 @@ class main extends CI_Controller {
 		return $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($users));
+	}
+
+	/**
+	* Get new comments
+	*/
+	public function getNewComments() {
+		$time = $this->input->get('time');
+		$count = $this->input->get('count');
+		$item_id = $this->input->get('item_id');
+		$this->load->model('comments_model');
+		$new_comments = $this->comments_model->getNewComments($time, $item_id);
+
+		if($count == 'count') {
+			$data = array('count'=>count($new_comments));
+		} else {
+			$data = $new_comments;
+		}
+
+		return $this->output
+	            ->set_content_type('application/json')
+	            ->set_output(json_encode($data));
 	}
 
 }

@@ -10,10 +10,12 @@
 	<script src="<?php echo base_url(); ?>assets/js/script.js"></script>
 	<script type="text/javascript">
 		base_url = '<?php echo base_url(); ?>';
+		time = '<?php echo date("Y-m-d H:i:s") ?>';
+		item_id = '<?php echo $item_id ?>';
 	</script>
 </head>
 <body>
-
+<div id="message_comments" class="pull-right fixed hide">There is/are <span id="new_comments_count"></span> new comment(s). Click [here] to view.</div>
 <div class="container" id="comments">
 	<br />
 	<?php if(count($comments) > 0): ?>
