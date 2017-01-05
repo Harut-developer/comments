@@ -66,7 +66,7 @@
 			</div>
 		<?php endforeach; ?>
 	<?php else: ?>
-		<div class="row">Have no comments.</div>
+		<div id="no_comments" class="row">Have no comments.</div>
 	<?php endif ?>
 </div>
 <div class="container">

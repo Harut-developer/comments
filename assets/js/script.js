@@ -88,6 +88,7 @@ $(function() {
 			});
 			$('#comments').append(list);
 			time = js_yyyy_mm_dd_hh_mm_ss();
+			$('#no_comments').remove();
 			$('#message_comments').addClass('hide');
 			goToByScroll("#" + scroll);
 		});
